@@ -1,5 +1,6 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="fo">
+                xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="fo"
+                xmlns:exslt="http://exslt.org/common">
 
     <xsl:output method="xml" version="1.0" omit-xml-declaration="no" indent="yes"/>
     <xsl:param name="version" select="'1.0'"/>
@@ -53,24 +54,31 @@
                                     </fo:table-cell>
                                 </fo:table-row>
                             </fo:table-header>
-                            <fo:table-footer>
-                                <fo:table-cell>
-                                    <fo:block text-align="right">
-                                        TOTAL DUE
-<!--                                        <xsl:value-of select=""></xsl:value-of>-->
-                                    </fo:block>
-                                </fo:table-cell>
-                            </fo:table-footer>
+<!--                            <fo:table-footer>-->
+<!--                                <fo:table-cell>-->
+<!--                                    <fo:block text-align="right">-->
+<!--                                        TOTAL DUE-->
+<!--&lt;!&ndash;                                        <xsl:value-of select=""></xsl:value-of>&ndash;&gt;-->
+<!--                                    </fo:block>-->
+<!--                                </fo:table-cell>-->
+<!--                            </fo:table-footer>-->
                             <fo:table-body>
                                 <xsl:apply-templates select="invoice"/>
                             </fo:table-body>
 
                         </fo:table>
                     </fo:block>
-<!--<fo:block text-align="right">-->
-<!--    <fo:block>TOTAL DUE-->
-<!--        <xsl:value-of select="quantity * rate"/></fo:block>-->
-<!--</fo:block>-->
+<fo:block text-align="right">
+    TOTAL DUE
+        <xsl:variable name="subTotals">
+            <xsl:for-each select="invoice">
+                <total>
+                    <xsl:value-of select="(quantity*rate)" />
+                </total>
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:value-of select="sum(exslt:node-set($subTotals)/total)"/>
+</fo:block>
                 </fo:flow>
             </fo:page-sequence>
         </fo:root>
@@ -91,7 +99,7 @@
             </fo:table-cell>
             <fo:table-cell text-align="center">
                 <fo:block>
-                    <xsl:value-of select="quantity"/>
+                    <xsl:value-of select="quantity" />
                 </fo:block>
             </fo:table-cell>
             <fo:table-cell text-align="center">
@@ -105,5 +113,19 @@
                 </fo:block>
             </fo:table-cell>
         </fo:table-row>
+<!--        <fo:block>Total Due-->
+<!--        <xsl:for-each select="invoice">-->
+<!--            <xsl:value-of select="sum(quantity*rate)"/>-->
+<!--        </xsl:for-each>-->
+<!--        </fo:block>-->
     </xsl:template>
+<!--    <xsl:template match="invoice">-->
+<!--        <fo:block>-->
+<!--        <xsl:copy>-->
+<!--            <xsl:for-each select="invoice">-->
+<!--                        <xsl:value-of select="sum(quantity*rate)"/>-->
+<!--            </xsl:for-each>-->
+<!--        </xsl:copy>-->
+<!--        </fo:block>-->
+<!--    </xsl:template>-->
 </xsl:stylesheet>
