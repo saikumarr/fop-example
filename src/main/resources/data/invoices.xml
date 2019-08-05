@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 <invoices>
+    <invoice>
+        <name>Chandan</name>
+        <activity>
+            Consulting Services of Chandan Ponugoti
+        </activity>
+        <date>(07/01/2019-07/07/2019)</date>
+        <quantity>40</quantity>
+        <rate>70.00</rate>
+    </invoice>
 	<invoice>
         <name>Chandan</name>
 		<activity>
@@ -20,19 +29,13 @@
         <quantity>40</quantity>
         <rate>70.00</rate>
     </invoice>
-	<invoice>
-		<activity>002</activity>
-		<quantity>Alhambra</quantity>
-		<rate>Seat</rate>
-	</invoice>
-	<invoice>
-		<activity>003</activity>
-		<quantity>A3</quantity>
-		<rate>Audi</rate>
-	</invoice>
-	<invoice>
-		<activity>004</activity>
-		<quantity>Camaro</quantity>
-		<rate>Chevrolet</rate>
-	</invoice>
+    <invoice>
+        <name>Chandan</name>
+        <activity>
+            Consulting Services of Chandan Ponugoti
+        </activity>
+        <date>(07/23/2019-07/29/2019)</date>
+        <quantity>40</quantity>
+        <rate>70.00</rate>
+    </invoice>
 </invoices>
